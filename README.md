@@ -7,6 +7,7 @@ for start application run in terminal
 cd ./langgraph_fastAPI_server
  
 1.pip install -e .
+2.create .env file contains google_api_key and tavily_api_key
 
 2.uvicorn app:app 
 
