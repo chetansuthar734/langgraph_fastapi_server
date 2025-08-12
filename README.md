@@ -1,2 +1,18 @@
 # langgraph_fastapi_server
 langgraph app  serve using fastapi server
+
+
+for start application run in terminal
+
+cd ./langgraph_fastAPI_server
+ 
+1.pip install -e .
+
+2.uvicorn app:app 
+
+
+
+how it works 
+
+when client request to server , server run langgraph application 
+langgraph application based on input query web search and  fastapi resonse to client  
