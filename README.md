@@ -24,7 +24,7 @@ how it works
 
 [2]. Render message and ui based on  Message type and id 
 >client render message and ui based on message type(based on message type we render ui) and id(for streaming chunk and partial response from agent)
->(important) client  render  streaming chunk to bubble and after get content full list of message state render
+>(important) client  render streaming chunk to bubble and after get content full list of message state render and setMessage("") flush , and setState() update
 
 
 [3]. graph run type   output = graph.stream(input , config, stream_mode )/.astream()/.astream_events()   
