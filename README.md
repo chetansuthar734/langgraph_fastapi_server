@@ -5,11 +5,11 @@ langgraph app  serve using fastapi server
 
 
 for start application run locally
-pull repo 
-cd ./langgraph_fastAPI_server
-1.pip install -e .
-2.create .env file contains google_api_key and tavily_api_key
-3.uvicorn app:app       //run  awsgi server
+[1].pull repo 
+[2].cd ./langgraph_fastAPI_server
+[3].pip install -e .
+[4].create .env file contains google_api_key and tavily_api_key
+[5]..uvicorn app:app       //run  awsgi server
 
  
 
