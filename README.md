@@ -19,24 +19,28 @@ how it works
  
 >client use EventSource() method to request server with input and checkpoint_id (here checkpoint_id use for persist state in  langgraph app across multiple invoke )
 >server get request with input and checkpoint_id ( based on checkpoint_id graph invoke and yield to StreamingResponse() )
->server response using StreamingRespose() sse event (response format is    "data:{"type":"content" or "end,"content":"AIMessage" or "ToolMessage"}"
+>server response using StreamingRespose() sse event (response format is    "data:{"type":"chunk"/"content"/"end","content":"AIMessage" or "ToolMessage"}"
 >client get reponse back from server.
->client render message and ui based on message type(based on message type we render ui) and id(for streaming chunk and partial response from agent)
 
-[2]. graph run type   output = graph.stream(input , config, stream_mode )/.astream()/.astream_events()   
+[2]. Render message and ui based on  Message type and id 
+>client render message and ui based on message type(based on message type we render ui) and id(for streaming chunk and partial response from agent)
+>(important) client  render  streaming chunk to bubble and after get content full list of message state render
+
+
+[3]. graph run type   output = graph.stream(input , config, stream_mode )/.astream()/.astream_events()   
 >diffrent graph run method give diffrent output
 >stream_mode =['custom','values','messages','update' ,'debug']
 
 
-[3] graph.stream()/astream()/astream_events() run method support stream_mode:
+[4] graph.stream()/astream()/astream_events() run method support stream_mode:
 >'messages', 'custom' mode is use for streaming ouput chunk from graph  (chunk from inside graph node)
 >'values','update' mode streaming state at itermeadiate graph step (when node return state )  step  
 
-[4]graph.invoke()
+[5]graph.invoke()     // not use when need real time stream
 >graph output state end of graph
 
 
-[5].graph architecture
+[6].graph architecture
 >get_stream_writer() method play a important role in Generative ui, custom message stream (partial_response )
 >get_stream_writer() work with stream_mode='custom'
 >langchain LCEL chain or langchain llm can streaming chunk when stream_mode='messages
