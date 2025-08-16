@@ -43,5 +43,6 @@ how it works
 
 [6].graph architecture
 >get_stream_writer() method play a important role in Generative ui, custom message stream (partial_response )
+>get_stream_writer() use for stream custom  chunk , after stream complate aggregate custom_chunk return ,so state contain messages  (help full for frontend setState for render ui atfer streaming end )
 >get_stream_writer() work with stream_mode='custom'
 >langchain LCEL chain or langchain llm can streaming chunk when stream_mode='messages
