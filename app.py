@@ -5,9 +5,7 @@ from langchain_core.messages import HumanMessage, AIMessageChunk, ToolMessage
 from dotenv import load_dotenv
 from langchain_community.tools.tavily_search import TavilySearchResults
 # from langchain_tavily import TavilySearch
-
 from fastapi import WebSocket
-
 from fastapi import FastAPI, Query
 from fastapi.responses import FileResponse ,HTMLResponse
 from fastapi.responses import StreamingResponse
@@ -17,11 +15,6 @@ from uuid import uuid4
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
-
-
-
-
-
 load_dotenv()
 
 # Initialize memory saver for checkpointing
@@ -46,12 +39,9 @@ search_tool = TavilySearchResults(
 #     # include_domains=None,
 #     # exclude_domains=None
 # )
+
 tools = [search_tool]
-
-
 llm = ChatGoogleGenerativeAI(model='gemini-2.0-flash')
-
-
 llm_with_tools = llm.bind_tools(tools=tools)
 
 async def model(state: State):
@@ -62,7 +52,7 @@ async def model(state: State):
 
 async def tools_router(state: State):
     last_message = state["messages"][-1]
-
+    #checking tool_calls or not based on state current message
     if(hasattr(last_message, "tool_calls") and len(last_message.tool_calls) > 0):
         return "tool_node"
     else: 
@@ -73,7 +63,7 @@ async def tool_node(state):
     # Get the tool calls from the last message
     tool_calls = state["messages"][-1].tool_calls
     
-    # Initialize list to store tool messages
+    # Initialize list to store tool messages for return , so graph state update
     tool_messages = []
     
     # Process each tool call
