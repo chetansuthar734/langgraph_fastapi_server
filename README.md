@@ -1,4 +1,4 @@
-# langgraph_custom_server
+# langgraph app with fastapi awsgi server
 langgraph app serve using fastapi server with uvicorn(awsgi)
 
 about project : React agent with tavily search tool , so agent get information from tavily search tool call.
